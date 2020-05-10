@@ -19,7 +19,7 @@ function trending(){
             d.classList.add("custom");
 
             d.innerHTML=`<div class="card" >
-            <img class="card-img-top" src="http://image.tmdb.org/t/p/w780/${response.data.results[i].poster_path}" alt="Card image cap">
+            <img class="card-img-top" src="https://image.tmdb.org/t/p/w780/${response.data.results[i].poster_path}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">${response.data.results[i].title}</h5>
               <p class="card-text">${response.data.results[i].overview}</p>
@@ -81,7 +81,7 @@ function searchpage(page,string){
             d.classList.add("custom");
 
             d.innerHTML=`<div class="card" >
-            <img class="card-img-top" src="http://image.tmdb.org/t/p/w780/${response.data.results[i].poster_path}" alt="Card image cap">
+            <img class="card-img-top" src="https://image.tmdb.org/t/p/w780/${response.data.results[i].poster_path}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">${response.data.results[i].title}</h5>
               <p class="card-text">${response.data.results[i].overview}</p>
