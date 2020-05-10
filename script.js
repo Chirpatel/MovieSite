@@ -2,10 +2,11 @@
 api_key="db2bcb5b85a1ff8f63787d7ca8512930"
 var elem = document.getElementById('input');
 
-
+var flag=0
 
 var url;
 function trending(){
+    flag=0;
     window.removeEventListener('hashchange', hashHandler, false);
     url=`https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}`
     document.getElementById('name').innerText=`Trending`
@@ -50,6 +51,7 @@ url1=`https://api.themoviedb.org/3/search/multi`
 var string=""
 
 async function search(){
+    flag=1;
     elem.innerHTML=""
     string = document.getElementById('search').value;
     //console.log("Searching");
@@ -145,18 +147,13 @@ async function details(id,type){
         console.log(response);
         document.getElementById('name').innerText=`${response.data.Title}`
     })
-    window.addEventListener('hashchange', hashHandler1, true);
+    window.addEventListener('hashchange', hashHandler, true);
 }
 
 function hashHandler() {
-    trending();
-    //console.log("Called1")
-}
-function hashHandler1() {
-    //console.log("Called2")
-    if(string !=="")
+    if(flag==1)
     search();
     else
     trending();
-    
+    //console.log("Called1")
 }
