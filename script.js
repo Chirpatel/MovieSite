@@ -10,11 +10,11 @@ function trending(){
     window.removeEventListener('hashchange', hashHandler, false);
     url=`https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}`
     document.getElementById('name').innerText=`Trending`
-    console.log("Trending");
+    //console.log("Trending");
     elem.innerHTML=""
     axios.get(url)
     .then(function(response){
-        console.log(response);
+        //console.log(response);
         //console.log(response.data.results.length)
         for(let i=0;i<response.data.results.length;i++){
             var d  = document.createElement('div');
@@ -71,7 +71,8 @@ async function search(){
             searchpage(i,string);
         }
     })
-    window.addEventListener('hashchange', hashHandler, true);
+    window.removeEventListener('hashchange', hashHandler, false);
+
 }
 function searchpage(page,string){
     var string = document.getElementById('search').value;
@@ -87,7 +88,7 @@ function searchpage(page,string){
         }
     })
     .then(function(response){
-        console.log(response);
+        //console.log(response);
         //console.log(response.data.results.length)
         for(let i=0;i<response.data.results.length;i++){
             if(response.data.results[i].poster_path!=null){
@@ -118,7 +119,7 @@ function searchpage(page,string){
 
 
 async function details(id,type){
-    console.log(id);
+    //console.log(id);
     elem.innerHTML=""
     document.getElementById('name').innerText=""
     var data;
@@ -130,7 +131,7 @@ async function details(id,type){
         }
     })
     .then(function(response){
-        console.log(response);
+        //console.log(response);
         data=response;
         imdbid=response.data.imdb_id;
     })
@@ -144,10 +145,10 @@ async function details(id,type){
         }
     })
     .then(function(response){
-        console.log(response);
+        //console.log(response);
         document.getElementById('name').innerText=`${response.data.Title}`
     })
-    window.addEventListener('hashchange', hashHandler, true);
+    window.addEventListener('hashchange', hashHandler, false);
 }
 
 function hashHandler() {
