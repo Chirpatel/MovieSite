@@ -1,26 +1,3 @@
-@media (max-width: 575px) {
-    .display-4 {
-        font-size: 2.4rem;
-      }
-      .container{
-        margin-top: 1400px;
-      }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-    .display-4 {
-        font-size: 2.8rem;
-      }
-      .container{
-        margin-top: 1200px;
-      }
-}
-
-@media (min-width: 768px) {
-    .display-4 {
-        font-size: 3.2rem;
-      }
-}
 
 
 .search > input{
@@ -50,7 +27,51 @@
     height: 350px;
 }
 .card-body{
-    height: 300px;
+    height: 260px;
+}
+.read{
+    visibility: hidden;
+    width:100%;
+}
+
+@media (max-width: 575px) {
+    .display-4 {
+        font-size: 2.4rem;
+        margin-top: 140px;
+      }
+    .card-body{
+        height: 220px;
+    }
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .display-4 {
+        font-size: 2.8rem;
+        margin-top: 80px;
+      }
+    .card-body{
+        height: 315px;
+    }
+}
+
+@media (min-width: 768px) and (max-width:991px) {
+    .display-4 {
+        font-size: 3.2rem;
+        margin-top: 80px;
+      }
+    .card-body{
+        height: 300px;
+    }
+}
+@media (min-width: 992px) {
+    .display-4 {
+        font-size: 3.2rem;
+        margin-top: 80px;
+      }
+    .card-body{
+        height: 210px;
+    }
 }
 
 
