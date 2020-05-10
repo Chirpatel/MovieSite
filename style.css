@@ -2,11 +2,17 @@
     .display-4 {
         font-size: 2.4rem;
       }
+      .container{
+        margin-top: 1400px;
+      }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
     .display-4 {
         font-size: 2.8rem;
+      }
+      .container{
+        margin-top: 1200px;
       }
 }
 
