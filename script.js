@@ -39,7 +39,7 @@ function search(){
     elem.innerHTML=""
     var string = document.getElementById('search').value;
     console.log("Searching");
-    document.getElementById('name').innerText=`Search: "${string}"`
+    document.getElementById('name').innerText=`Search result: "${string}"`
     axios.get(url1,{
         params:{
             api_key:api_key,
