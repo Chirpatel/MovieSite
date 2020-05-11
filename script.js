@@ -150,6 +150,7 @@ async function details(id,type){
     var node=document.createElement('div');
     bposter="https://image.tmdb.org/t/p/w780/"+data.backdrop_path;
     node.classList.add('Wallpaper');
+    node.id="image";
     node.style=`background-image: linear-gradient(rgba(41, 128, 185, 0), rgb(0, 0, 0)), url(${bposter});`
     desp.appendChild(node);
 
@@ -354,9 +355,23 @@ async function details(id,type){
 
 
 
+    url=`https://imdb-api.com/en/API/Title/k_j5E2pHd2/${imdbid}/Trailer`
     
-    
-    
+    await axios.get(url)
+    .then(function(response){
+        console.log(response);
+        data=response.data;
+        console.log(data.trailer.linkEmbed);
+        if(data.trailer.errorMessage!="Trailer not founded"){
+        width=document.getElementById('image').offsetWidth;
+        height= width*3/4;
+        node=document.createElement('div');
+        node.innerHTML=`<iframe src="${data.trailer.linkEmbed}?autoplay=false&width=${width}" width="${width}px" height="${height}px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>`;
+        node1.appendChild(node);
+        }
+        /*<iframe src="https://www.imdb.com/video/imdb/vi264945433/imdb/embed?autoplay=false&width=320" width="720px" height="480" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>*/
+        desp.appendChild(node1);
+    })
     
     
     
