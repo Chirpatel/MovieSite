@@ -140,7 +140,7 @@ async function details(id,type){
         }
     })
     .then(function(response){
-        console.log(response);
+        //console.log(response);
         data=response.data;
     })
 
@@ -159,7 +159,7 @@ async function details(id,type){
     if(title==undefined)
         title =data.name;
     poster="https://image.tmdb.org/t/p/w780/"+data.poster_path;
-    console.log("Poster: ",poster);
+    //console.log("Poster: ",poster);
     node= document.createElement('div');
     node.classList.add('SingleHead');
     node.innerHTML=`<img src="${poster}" alt="${title}" title="${title}"/>`
@@ -181,7 +181,7 @@ async function details(id,type){
 
     for(let i =0;i<genres.length;i++){
         var temp=document.createElement('span')
-        temp.innerText=genres[i]['name'];
+        temp.innerText=genres[i]['name']+" ";
         node1.appendChild(temp);
     }
     node.appendChild(node1);
@@ -200,46 +200,16 @@ async function details(id,type){
     desp.appendChild(node);
 
 
-    /*
-        <div class="otherdetails">
-                <span>Time: 100mins</span>
-                <span>Status: Released</span>
-                <span>Vote: 7.3 (932)</span>
-        </div> */
-    node1=document.createElement('div');
-    node1.classList.add('otherdetails');
-
-    /*Runtime */
-    runtime=data.runtime;
-    console.log("Runtime: ",runtime);
-    node=document.createElement('span');
-    node.innerText="Time: "+runtime+" mins"
-    node1.appendChild(node);
-
-    /*Status */
-    status= data.status;
-    console.log("Status: ",status);
-    node=document.createElement('span');
-    node.innerText="Status: "+status;
-    node1.appendChild(node);
-
-    /*Vote */
-    vote_average=data.vote_average;
-    vote_count=data.vote_count;
-    console.log("Vote: ",vote_average,vote_count);
-    node=document.createElement('span');
-    node.innerText="Vote: "+vote_average+" ("+vote_count+")";
-    node1.appendChild(node);
-    desp.appendChild(node1);
-    
+    var data1;
+    var imdbid;
     await axios.get(url+'/external_ids',{
         params:{
             api_key:api_key,
         }
     })
     .then(function(response){
-        console.log(response);
-        data=response;
+        //console.log(response);
+        //data=response;
         imdbid=response.data.imdb_id;
     })
     
@@ -251,27 +221,152 @@ async function details(id,type){
         }
     })
     .then(function(response){
-        console.log(response);
+        //console.log(response);
         //document.getElementById('name').innerText=`${response.data.Title}`
         document.getElementById('name').innerText=``
-        data=response.data;
+        data1=response.data;
 
-        /*Title */
-        title= data.Title;
 
-        year=data.Year;
-        rated= data.Rated;
-        released = data.released;
-        director=data.Director;
-        actors = data.Actors;
-        language= data.Language;
-        poster=data.Poster;
-        ratings=data.Ratings;
-        imdbrating=data.imdbRating;
-        imdbvotes=data.imdbVotes;
-        iimdbid=data.imdbID;
-        type=data.Type;
     })
+    /*
+    <div class="otherdetails">
+        <span>Time: 100 mins</span>
+        <span>Date: 4th Feb, 2020</span>
+        <span>Status: Released</span>
+        <span>Rated: PG</span>
+        <span>Language: EN,RU</span>
+        <span>Metascore: 47</span>
+        <span>Type: TV</span>
+    </div> */
+    node1=document.createElement('div');
+    node1.classList.add('otherdetails');
+    node1.innerHTML="<H1>Details</H1>"
+
+    /*Runtime */
+    if(data.runtime){
+    runtime=data.runtime;
+    //console.log("Runtime: ",runtime);
+    node=document.createElement('span');
+    node.innerText="Time: "+runtime+" mins"
+    node1.appendChild(node);
+    }
+    /*Date *//*Released Date */
+    release = data1.Released;
+    node=document.createElement('span');
+    node.innerText="Date: "+release;
+    node1.appendChild(node);
+    
+    /*Status */
+    status= data.status;
+    //console.log("Status: ",status);
+    node=document.createElement('span');
+    node.innerText="Status: "+status;
+    node1.appendChild(node);
+
+    /*Rated (A,PG,...)*/
+    rated= data1.Rated;
+    node=document.createElement('span');
+    node.innerText="Rated: "+rated;
+    node1.appendChild(node);
+
+    /*Language List (,) */
+    language= data1.Language;
+    node=document.createElement('span');
+    node.innerText="Language: "+language;
+    node1.appendChild(node);
+    
+    /*Metascore *//*MetaScore */
+    metascore=data1.Metascore;
+    node=document.createElement('span');
+    node.innerText="Metascore: "+metascore;
+    node1.appendChild(node);
+
+    /*Type *//*Type */
+    type=data1.Type;
+    type=type[0].toUpperCase()+type.substring(1);
+    node=document.createElement('span');
+    node.innerText="Type: " +type;
+    node1.appendChild(node);
+
+    desp.appendChild(node1);
+    /*
+    <div class="castdetails">
+        <span>Director: qwertyu qwertyu</span>
+        <span>Actors: asdfghj, asdfghjk, asdfghjk, asdfghjk</span>
+    </div> 
+    */
+    node1=document.createElement('div');
+    node1.classList.add('castdetails');
+    node1.innerHTML="<H1>Cast:</H1>"
+
+    /*Director */
+    director=data1.Director;
+    node=document.createElement('span');
+    node.innerText="Director: "+director;
+    node1.appendChild(node);
+
+    /*Actor list (,)*/
+    actors = data1.Actors;
+    node=document.createElement('span');
+    node.innerText="Actor: "+actors;
+    node1.appendChild(node);
+
+    desp.appendChild(node1);
+    /*
+    <div class="ratings">
+        <span><a src="https://www.imdb.com/title/${id}/">Imdb:</a> 7.3 (934)</span>
+        <span>Vote: 7.3 (934)</span>
+        <span> SourceName: 10/10</span>
+        <span> SourceName: 10/10</span>
+    </div> 
+    */
+    node1=document.createElement('div');
+    node1.classList.add('ratings');
+    node1.innerHTML="<H1>Ratings</H1>"
+    
+
+    /*Imdb Rating */
+    imdbrating=data1.imdbRating;
+    imdbvotes=data1.imdbVotes;
+    /*ImdbId to forward */
+    imdbid=data1.imdbID;
+    node=document.createElement('span');
+    node.innerHTML=`<a href="https://www.imdb.com/title/${imdbid}/">Imdb Rating:</a> ${imdbrating}/10 (${imdbvotes})`;
+    node1.appendChild(node);
+
+    /*Vote */
+    vote_average=data.vote_average;
+    vote_count=data.vote_count;
+    //console.log("Vote: ",vote_average,vote_count);
+    node=document.createElement('span');
+    node.innerText="Votes: "+vote_average+"/10 ("+vote_count+")";
+    node1.appendChild(node);
+
+    /*Ratings  Array (Source,Value)*/
+    ratings=data1.Ratings;
+    for(let i=0;i<ratings.length;i++){
+        node=document.createElement('span');
+        node.innerText=`${ratings[i]['Source']}: ${ratings[i]['Value']}`;
+        node1.appendChild(node);
+    }
+
+    desp.appendChild(node1);
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
     window.addEventListener('hashchange', hashHandler, false);
 }
 

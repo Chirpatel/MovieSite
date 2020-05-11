@@ -94,8 +94,9 @@
 
 .SingleHead {
     float: left;
-    width: 120px;
-    margin: -95px 25px 0 15px;
+    width: 160px;
+    height: 215px;
+    margin: -117.5px 25px 0 15px;
     overflow: hidden;
     background: #06060882;
     background-color: #08090c;
@@ -103,12 +104,12 @@
     background-position: 50% 50%;
     background-size: 40px;
     box-shadow: 0 5px 30px 3px #00000069;
-    height: 175px;
     position: relative;
     border-radius: 4px;
 }
 .SingleHead img {
     width: 100%;
+    height:inherit;
 }
 .SingleContent {
     display: flex;
@@ -125,7 +126,11 @@
     color: #fff;
     line-height: 40px;
     text-shadow: 1px 1px 1px #00000096;
-    white-space: nowrap;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
@@ -147,30 +152,34 @@ h1 {
     float: left;
     width: 100%;
     position: relative;
-    top: 33px;
+    top: 56px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
+
 .Genres span{
     font-size: 18px;
     margin:10px;
-    font-weight: 600;
+    font-weight: 600; 
 }
 .overview{
     padding-top:80px;
     border-radius: 4px;
+    text-align: justify;
 }
 .overview p{
     margin:10px;
     font-size:20px;
 }
-.otherdetails{
+.otherdetails,.ratings,.castdetails{
     margin:10px;
 }
-.otherdetails span{
+.otherdetails span,.ratings span,.castdetails span{
     margin-right:10px;
     font-size:18px;
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 600px){
     .Wallpaper {
         padding: 0 0 55% 0;
     }
@@ -178,14 +187,46 @@ h1 {
         padding-top:40px;
     }
     .overview p{
-        font-size:15px;
+        font-size:12px;
     }
     .Genres p{
-        font-size: 15px;
+        font-size: 12px;
+    }
+    .SingleHead{
+        width: 100px;
+        height: 155px;
+        margin: -77.5px 25px 0 15px;
+    }
+    .Genres{
+        top: 21px;
+    }
+    .Genres span{
+        font-size: 12px;
+        margin:5px;
+        font-weight: 600; 
+    }
+    .otherdetails span,.ratings span,.castdetails span{
+        margin-right:10px;
+        font-size:12px;
+    }
+    .SingleContent h1 {
+        font-size: 16px;
+        top: 21px;
+    }
+    h1{
+        font-size: 16px;
     }
 }
-@media screen and (max-width: 600px){
+@media (min-width: 601px) and (max-width: 991px){
     .Wallpaper {
         padding: 0 0 45% 0;
+    }
+    .SingleContent h1 {
+        font-size: 30px;
+        line-height: 40px;
+        top: 0px;
+    }
+    h1{
+        font-size: 30px;
     }
 }
