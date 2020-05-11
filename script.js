@@ -364,7 +364,7 @@ async function details(id,type){
         console.log(data.trailer.linkEmbed);
         if(data.trailer.errorMessage!="Trailer not founded"){
         width=document.getElementById('image').offsetWidth;
-        height= width*3/4;
+        height= width*0.5;
         node=document.createElement('div');
         node.innerHTML=`<iframe src="${data.trailer.linkEmbed}?autoplay=false&width=${width}" width="${width}px" height="${height}px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>`;
         node1.appendChild(node);
