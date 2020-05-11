@@ -363,14 +363,28 @@ async function details(id,type){
         data=response.data;
         console.log(data.trailer.linkEmbed);
         if(data.trailer.errorMessage!="Trailer not founded"){
-        width=document.getElementById('image').offsetWidth;
-        height= width*0.5;
+        node1=document.createElement('div');
+        node1.classList.add('trailer');
+        node1.innerHTML="<H1>Trailer</H1>"
+        width=(Math.floor((document.getElementById('image').offsetWidth)/60)*60)-80;
+        if(width>854){
+            width=854;
+        }
+        if(width<400){
+            width=400;
+            document.getElementsByClassName('trailer').style="margin:0px;"
+        }
+        height= width/1.5;
         node=document.createElement('div');
-        node.innerHTML=`<iframe src="${data.trailer.linkEmbed}?autoplay=false&width=${width}" width="${width}px" height="${height}px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>`;
+        node.classList.add('trailer1');
+        node.innerHTML=`<iframe src="${data.trailer.linkEmbed}?autoplay=false&width=${width}" width="${width+80}px" height="${height}px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no">
+    <script type="text/JavaScript" src="script.js"></script>  
+    </iframe>`;
         node1.appendChild(node);
+        desp.appendChild(node1);
         }
         /*<iframe src="https://www.imdb.com/video/imdb/vi264945433/imdb/embed?autoplay=false&width=320" width="720px" height="480" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>*/
-        desp.appendChild(node1);
+        
     })
     
     

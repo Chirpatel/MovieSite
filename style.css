@@ -216,6 +216,10 @@ h1 {
     h1{
         font-size: 16px;
     }
+
+    .trailer1 {
+        margin-bottom: 20px;
+    }
 }
 @media (min-width: 601px) and (max-width: 991px){
     .Wallpaper {
