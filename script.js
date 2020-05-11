@@ -120,22 +120,119 @@ function searchpage(page,string){
 
 async function details(id,type){
     //console.log(id);
+    var desp = document.getElementById('description');
+    var data;
     elem.innerHTML=""
+    desp.innerHTML=""
     document.getElementById('name').innerText=""
     var data;
-    url=`https://api.themoviedb.org/3/${type}/${id}/external_ids`
-    
+    url=`https://api.themoviedb.org/3/${type}/${id}`
     await axios.get(url,{
         params:{
             api_key:api_key,
         }
     })
     .then(function(response){
-        //console.log(response);
+        console.log(response);
+        data=response.data;
+    })
+
+
+    /*Background Poster */
+    /* <div class="Wallpaper" style="background-image: linear-gradient(rgba(41, 128, 185, 0), rgb(0, 0, 0)), url(https://image.tmdb.org/t/p/w780//9sXHqZTet3Zg5tgcc0hCDo8Tn35.jpg);"></div> */
+    var node=document.createElement('div');
+    bposter="https://image.tmdb.org/t/p/w780/"+data.backdrop_path;
+    node.classList.add('Wallpaper');
+    node.style=`background-image: linear-gradient(rgba(41, 128, 185, 0), rgb(0, 0, 0)), url(${bposter});`
+    desp.appendChild(node);
+
+    /*Poster */
+    /*<div class="SingleHead"><img src="https://image.tmdb.org/t/p/w780//33VdppGbeNxICrFUtW2WpGHvfYc.jpg" alt="The Call of the Wild" title="The Call of the Wild"></div>*/
+    title=data.title;
+    poster="https://image.tmdb.org/t/p/w780/"+data.poster_path;
+    console.log("Poster: ",poster);
+    node= document.createElement('div');
+    node.classList.add('SingleHead');
+    node.innerHTML=`<img src="${poster}" alt="${title}" title="${title}"/>`
+    desp.appendChild(node);
+
+    /*<div class="SingleContent">
+            <h1><font style="vertical-align: inherit;">The Call of the Wild</font></h1>
+            <div class="Genres">
+            <span>Action </span> 
+            </div>
+        </div> */
+    /*Title & Genres */
+    genres =data.genres;
+    node = document.createElement('div');
+    node.classList.add("SingleContent");
+    node.innerHTML=`<h1><font style="vertical-align: inherit;">${title}</font></h1>`
+    var node1=document.createElement('div');
+    node1.classList.add('Genres');
+
+    for(let i =0;i<genres.length;i++){
+        var temp=document.createElement('span')
+        temp.innerText=genres[i]['name'];
+        node1.appendChild(temp);
+    }
+    node.appendChild(node1);
+    desp.appendChild(node);
+
+
+    /*Overview */
+    /*<div class="overview">
+            <p></p>
+        </div> */
+    overview=data.overview;
+    //console.log('Overview: ',overview);
+    node = document.createElement('div');
+    node.classList.add('overview');
+    node.innerHTML=`<p>${overview}</p>`;
+    desp.appendChild(node);
+
+
+    /*
+        <div class="otherdetails">
+                <span>Time: 100mins</span>
+                <span>Status: Released</span>
+                <span>Vote: 7.3 (932)</span>
+        </div> */
+    node1=document.createElement('div');
+    node1.classList.add('otherdetails');
+
+    /*Runtime */
+    runtime=data.runtime;
+    console.log("Runtime: ",runtime);
+    node=document.createElement('span');
+    node.innerText="Time: "+runtime+" mins"
+    node1.appendChild(node);
+
+    /*Status */
+    status= data.status;
+    console.log("Status: ",status);
+    node=document.createElement('span');
+    node.innerText="Status: "+status;
+    node1.appendChild(node);
+
+    /*Vote */
+    vote_average=data.vote_average;
+    vote_count=data.vote_count;
+    console.log("Vote: ",vote_average,vote_count);
+    node=document.createElement('span');
+    node.innerText="Vote: "+vote_average+" ("+vote_count+")";
+    node1.appendChild(node);
+    desp.appendChild(node1);
+    
+    await axios.get(url+'/external_ids',{
+        params:{
+            api_key:api_key,
+        }
+    })
+    .then(function(response){
+        console.log(response);
         data=response;
         imdbid=response.data.imdb_id;
     })
-    
     
     url=`https://www.omdbapi.com/`
     await axios.get(url,{
@@ -145,8 +242,26 @@ async function details(id,type){
         }
     })
     .then(function(response){
-        //console.log(response);
-        document.getElementById('name').innerText=`${response.data.Title}`
+        console.log(response);
+        //document.getElementById('name').innerText=`${response.data.Title}`
+        document.getElementById('name').innerText=``
+        data=response.data;
+
+        /*Title */
+        title= data.Title;
+
+        year=data.Year;
+        rated= data.Rated;
+        released = data.released;
+        director=data.Director;
+        actors = data.Actors;
+        language= data.Language;
+        poster=data.Poster;
+        ratings=data.Ratings;
+        imdbrating=data.imdbRating;
+        imdbvotes=data.imdbVotes;
+        iimdbid=data.imdbID;
+        type=data.Type;
     })
     window.addEventListener('hashchange', hashHandler, false);
 }
@@ -156,5 +271,37 @@ function hashHandler() {
     search();
     else
     trending();
-    //console.log("Called1")
 }
+
+/*
+/*tmdbapi 
+bposter=data.backdrop_path;
+genres =data.genres;
+homepage=data.homepage;
+overview=data.overview;
+poster=data.poster_path;
+runtime=data.runtime;
+status= data.status;
+vote_average=data.vote_average;
+vote_count=data.vote_count;
+
+
+
+
+/*omdbapi 
+title= data.Title;
+year=data.Year;
+rated= data.Rated;
+released = data.released;
+
+director=data.Director;
+actors = data.Actors;
+
+language= data.Language;
+poster=data.Poster;
+ratings=data.Ratings;
+imdbrating=data.imdbRating;
+imdbvotes=data.imdbVotes;
+iimdbid=data.imdbID;
+type=data.Type;
+*/
