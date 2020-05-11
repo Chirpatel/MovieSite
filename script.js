@@ -241,7 +241,7 @@ async function details(id,type){
     </div> */
     node1=document.createElement('div');
     node1.classList.add('otherdetails');
-    node1.innerHTML="<H1>Details</H1>"
+    node1.innerHTML="<H1>Details:</H1>"
 
     /*Runtime */
     if(data.runtime){
@@ -323,7 +323,7 @@ async function details(id,type){
     */
     node1=document.createElement('div');
     node1.classList.add('ratings');
-    node1.innerHTML="<H1>Ratings</H1>"
+    node1.innerHTML="<H1>Ratings:</H1>"
     
 
     /*Imdb Rating */
@@ -365,7 +365,7 @@ async function details(id,type){
         if(data.trailer.errorMessage!="Trailer not founded"){
         node1=document.createElement('div');
         node1.classList.add('trailer');
-        node1.innerHTML="<H1>Trailer</H1>"
+        node1.innerHTML="<H1>Trailer:</H1>"
         width=(Math.floor((document.getElementById('image').offsetWidth)/60)*60)-80;
         if(width>854){
             width=854;
