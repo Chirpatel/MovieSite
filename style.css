@@ -33,7 +33,15 @@
     visibility: hidden;
     width:100%;
 }
-
+.card-text{
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media (max-width: 575px) {
     .display-4 {
         font-size: 2.4rem;
@@ -87,7 +95,7 @@
 .SingleHead {
     float: left;
     width: 120px;
-    margin: -85px 25px 0 15px;
+    margin: -95px 25px 0 15px;
     overflow: hidden;
     background: #06060882;
     background-color: #08090c;
@@ -108,14 +116,14 @@
     align-items: flex-start;
     align-content: center;
     box-sizing: border-box;
-    margin: -45px 0 0 0;
+    margin: -55px 0 0 0;
 }
 .SingleContent h1 {
     margin: 0;
     font-weight: 300;
     font-size: 35px;
     color: #fff;
-    line-height: 30px;
+    line-height: 40px;
     text-shadow: 1px 1px 1px #00000096;
     white-space: nowrap;
     overflow: hidden;

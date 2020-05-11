@@ -1,17 +1,25 @@
 
 api_key="db2bcb5b85a1ff8f63787d7ca8512930"
 var elem = document.getElementById('input');
+var desp = document.getElementById('description');
+
 
 var flag=0
 
 var url;
+
+function empty(){
+    elem.innerHTML="";
+    desp.innerHTML="";
+}
+
 function trending(){
+    empty();
     flag=0;
     window.removeEventListener('hashchange', hashHandler, false);
     url=`https://api.themoviedb.org/3/trending/all/day?api_key=${api_key}`
     document.getElementById('name').innerText=`Trending`
     //console.log("Trending");
-    elem.innerHTML=""
     axios.get(url)
     .then(function(response){
         //console.log(response);
@@ -32,7 +40,7 @@ function trending(){
              <img class="card-img-top" src="https://image.tmdb.org/t/p/w780/${response.data.results[i].poster_path}" alt="Card image cap">
              <div class="card-body">
                <h5 class="card-title">${title}</h5>
-               <p class="card-text">${response.data.results[i].overview.substring(0, 100)}...</p>
+               <p class="card-text">${response.data.results[i].overview}</p>
                <div class="fixed-bottom"><a href="#"  id="read${id}"class="btn read btn-primary " onclick="details('${id}','${type}')">Read More</a></div></div>`
              elem.appendChild(d);
         }
@@ -52,7 +60,7 @@ var string=""
 
 async function search(){
     flag=1;
-    elem.innerHTML=""
+    empty();
     string = document.getElementById('search').value;
     //console.log("Searching");
     document.getElementById('name').innerText=`Search result: "${string}"`
@@ -107,7 +115,7 @@ function searchpage(page,string){
             <img class="card-img-top" src="https://image.tmdb.org/t/p/w780/${response.data.results[i].poster_path}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">${title}</h5>
-              <p class="card-text">${response.data.results[i].overview.substring(0, 100)}...</p>
+              <p class="card-text">${response.data.results[i].overview}</p>
               <div class="fixed-bottom"><a href="#"  id="read${id}"class="btn read btn-primary " onclick="details('${id}','${type}')">Read More</a></div></div>`
             
             elem.appendChild(d);
@@ -122,8 +130,7 @@ async function details(id,type){
     //console.log(id);
     var desp = document.getElementById('description');
     var data;
-    elem.innerHTML=""
-    desp.innerHTML=""
+    empty();
     document.getElementById('name').innerText=""
     var data;
     url=`https://api.themoviedb.org/3/${type}/${id}`
@@ -149,6 +156,8 @@ async function details(id,type){
     /*Poster */
     /*<div class="SingleHead"><img src="https://image.tmdb.org/t/p/w780//33VdppGbeNxICrFUtW2WpGHvfYc.jpg" alt="The Call of the Wild" title="The Call of the Wild"></div>*/
     title=data.title;
+    if(title==undefined)
+        title =data.name;
     poster="https://image.tmdb.org/t/p/w780/"+data.poster_path;
     console.log("Poster: ",poster);
     node= document.createElement('div');
